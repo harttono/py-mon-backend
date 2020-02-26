@@ -70,19 +70,20 @@ exports.updatePayment = (req, res)=>{
     const jwtData = verifyJwt(req.headers.authorization)
     if(!jwtData.error){
         Payment.update(req.body,{where:{id:idPayment}}).then(payment =>{
-             if(payment){
-             Payment.findOne({
-                 include:[
-                     {
-                         model:User,
-                         attributes:["id","breeder","phone","address","createdAt","updatedAt"],
-                         as :"user"
-                     }
-                 ]
-             }).then(show =>{
-                 res.send({ data: req.body});
-             })
-             } 
+             res.send({data : payment})
+            //  if(payment){
+            //  Payment.findOne({
+            //      include:[
+            //          {
+            //              model:User,
+            //              attributes:["id","breeder","phone","address","createdAt","updatedAt"],
+            //              as :"user"
+            //          }
+            //      ]
+            //  }).then(show =>{
+            //      res.send({ data: req.body});
+            //  })
+            //  } 
          })
         
     }

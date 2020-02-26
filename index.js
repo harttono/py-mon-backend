@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 require("express-group-routes");
-const { authenticated } = require("./middleware");
+const { authenticated }   = require("./middleware");
 const logginController    = require("./controllers/login");
 const registerController  = require("./controllers/registration");
 const speciesController   = require("./controllers/species");
@@ -11,6 +11,7 @@ const userController      = require('./controllers/user')
 const paymentController   = require("./controllers/payment")
 const app = express();
 const port = procces.env.PORT||4003;
+// const port = 4003;
 app.use(bodyparser.json());
 app.group("/api/v1", router => {
   router.post("/register", registerController.register);
@@ -36,7 +37,7 @@ app.group("/api/v1", router => {
 
   // // payment router
   router.post("/payment", authenticated,paymentController.paying);
-  router.put("/payment/:id"), authenticated,paymentController.updatePayment;
+  router.put("/payment/:id"),paymentController.updatePayment;
 });
 
 app.listen(port);
