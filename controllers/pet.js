@@ -2,7 +2,6 @@ const Model = require("../models");
 const Pet = Model.pet;
 const User = Model.user;
 const Species = Model.species;
-const Age = Model.age;
 
 
 // insert data pet 
@@ -12,7 +11,7 @@ exports.Insert = (req, res) => {
      name: Body.name,
      gender: Body.gender,
      id_species:Body.species.id,
-     id_age:Body.age.id,
+     age:Body.age.id,
      id_user:Body.user.id,
      about: Body.about,
      photo: Body.photo
@@ -21,13 +20,12 @@ exports.Insert = (req, res) => {
   Pet.create(dataPet).then(resPet => {
     User.findOne({ where: { id: Body.user.id } }).then(user => {
       Species.findOne({ where: { id: Body.species.id } }).then(species => {
-        Age.findOne({ where: { id: Body.age.id } }).then(age=> {
           const resData = {
             id: resPet.id,
             name: resPet.name,
             gender: resPet.gender,
             species,
-            age,
+            age:resPet.age.id,
             user,
             photo: resPet.photo,
             about: resPet.about
@@ -35,8 +33,7 @@ exports.Insert = (req, res) => {
           res.send({
             message: "Data has been successfully",
             resData
-          });
-        });
+          }); 
       });
     });
   });
@@ -48,6 +45,7 @@ exports.Insert = (req, res) => {
        attributes: [
          "id",
          "name",
+         "age",
          "gender",
          "photo",
          "about"
@@ -57,11 +55,6 @@ exports.Insert = (req, res) => {
            model: Species,
            attributes: ["id", "name"],
            as: "species"
-         },
-         {
-           model: Age,
-           attributes: ["id", "name"],
-           as: "age"
          },
          {
            model: User,
@@ -91,7 +84,7 @@ if(data){
    name:req.body.name,
    gender:req.body.gender,
    id_species:req.body.id_species,
-   id_age:req.body.id_age,
+   age:req.body.age.id,
    id_user:req.body.id_user,
    photo:req.body.photo,
    about:req.body.about
@@ -104,11 +97,6 @@ Pet.update(updateData,{where:{id:idPet}}).then(updateResult => {
            model:Species,
            attributes:["id","name"],
            as:"species"
-         },
-         {
-          model:Age,
-          attributes:["id","name"],
-          as:"age"
          },
          {
           model :User,

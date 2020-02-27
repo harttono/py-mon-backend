@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     });
     match.belongsTo(models.pet, {
     foreignKey: "id_pet_liked",
-    as: "Match"
-        });
+    as: "Mliked"
+    });
 
   };
   return match;

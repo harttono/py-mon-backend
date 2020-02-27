@@ -24,15 +24,9 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade"
       },
-      id_age: {
-        type: Sequelize.INTEGER,
+      age: {
+        type: Sequelize.ENUM(["Child","Teenager","Adult"]),
         allowNull: false,
-        references: {
-          model: "ages",
-          key: "id"
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade"
       },
       id_user: {
         type: Sequelize.INTEGER,

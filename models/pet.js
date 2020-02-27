@@ -2,9 +2,9 @@
 module.exports = (sequelize, DataTypes) => {
   const pet = sequelize.define('pet', {
     name: DataTypes.STRING,
-    gender: DataTypes.ENUM,
+    gender: DataTypes.STRING,
     id_species: DataTypes.INTEGER,
-    id_age: DataTypes.INTEGER,
+    age: DataTypes.STRING,
     id_user: DataTypes.INTEGER,
     photo: DataTypes.STRING,
     about: DataTypes.STRING
@@ -14,10 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     pet.belongsTo(models.species, {
      foreignKey: "id_species",
      as:"species"
-       });
-   pet.belongsTo(models.age, {
-    foreignKey: "id_age",
-    as:"age"
        });
     pet.belongsTo(models.user,{
       foreignKey: "id_user",

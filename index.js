@@ -22,6 +22,7 @@ app.group("/api/v1", router => {
   router.post("/species",authenticated,speciesController.store);
   router.get("/species", speciesController.getAll);
 
+
   // //pet router
   router.post("/pet", authenticated,petController.Insert);
   router.get("/pet", authenticated,petController.getAllPet);
