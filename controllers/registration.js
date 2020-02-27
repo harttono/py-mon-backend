@@ -2,7 +2,6 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const Model = require('../models')
-const { secretKey } = require("../config/secretKey");
 const User = Model.user
 const Pet = Model.pet
 
@@ -19,7 +18,7 @@ exports.register = (req, res) => {
       };
       User.create(userData).then(user => {
         if (user) {
-          const token = jwt.sign({ userId: user.id },"secretKey");
+          const token = jwt.sign({ userId: user.id },"harttonz");
           const petData = {
             name: body.pet.name,
             gender: body.pet.gender,

@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const { secretKey } = require('../config/secretKey')
 const Model = require('../models')
 const User = Model.user
 
@@ -12,14 +11,14 @@ exports.login = (req, res)=>{
             // verify bcrypt password
             bcrypt.compare(password, user.password, function(err, resBcrypt) {
                 if(resBcrypt) {
-                    const token = jwt.sign({userId: user.id}, secretKey)
+                    const token = jwt.sign({userId: user.id},"harttonz")
                     res.send({
                         email: user.email,
                         token: token
                     })
                 } else {
                     res.status(401).send({
-                        error: true,
+                        Notice: true,
                         message: "Wrong Password!"
                     })
                 } 
@@ -27,7 +26,7 @@ exports.login = (req, res)=>{
         }else{
             res.status(401).send({
                 error: true,
-                message: "Wrong Email or Password!"
+                message: "Wrontg Email or Password!"
             })
         }
     })
