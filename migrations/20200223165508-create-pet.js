@@ -25,7 +25,7 @@ module.exports = {
         onDelete: "cascade"
       },
       age: {
-        type: Sequelize.ENUM(["Child","Teenager","Adult"]),
+        type: Sequelize.ENUM(['Child','Teenager','Adult']),
         allowNull: false,
       },
       id_user: {

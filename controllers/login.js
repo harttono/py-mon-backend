@@ -9,8 +9,8 @@ exports.login = (req, res)=>{
     User.findOne({where: {email}}).then(user => {
         if(user){
             // verify bcrypt password
-            bcrypt.compare(password, user.password, function(err, resBcrypt) {
-                if(resBcrypt) {
+                bcrypt.compare(password, user.password, function(err, res) {
+                if(res) {
                     const token = jwt.sign({userId: user.id},"harttonz")
                     res.send({
                         email: user.email,
@@ -26,7 +26,7 @@ exports.login = (req, res)=>{
         }else{
             res.status(401).send({
                 error: true,
-                message: "Wrontg Email or Password!"
+                message: "Wrong email or Password!"
             })
         }
     })

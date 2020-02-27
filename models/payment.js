@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING
   }, {});
   payment.associate = function(models) {
-    payment.belongsTo(models.user, {
+    payment.hasMany(models.user, {
       foreignKey: "id_user",
       as: "user"
     });
