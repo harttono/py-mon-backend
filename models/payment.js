@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     no_rek: DataTypes.INTEGER,
     proof_of_payment: DataTypes.STRING,
     id_user: DataTypes.INTEGER,
-    status: DataTypes.BOOLEAN
+    status: DataTypes.ENUM
   }, {});
   payment.associate = function(models) {
     payment.belongsTo(models.user, {

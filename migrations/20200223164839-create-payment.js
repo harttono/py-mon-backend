@@ -25,7 +25,7 @@ module.exports = {
         onDelete: "cascade"
       },
       status: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.ENUM(["Free","Premium"])
       },
       createdAt: {
         allowNull: false,
