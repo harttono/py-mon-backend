@@ -19,7 +19,7 @@ module.exports = {
         onDelete: "cascade"
       },
       id_pet_liked: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.INTEGER
       },
       status: {
         type: Sequelize.BOOLEAN

@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const match = sequelize.define('match', {
     id_pet: DataTypes.INTEGER,
-    id_pet_liked: DataTypes.BOOLEAN,
+    id_pet_liked: DataTypes.INTEGER,
     status: DataTypes.BOOLEAN
   }, {});
   match.associate = function(models) {

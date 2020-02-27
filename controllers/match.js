@@ -1,35 +1,33 @@
 const models = require("../models");
 const Match = models.match;
 const Pet = models.pet;
-const Spesies = models.spesies;
+const Spesies = models.species;
 const Age = models.age;
 const User = models.user;
 
 exports.checkmatch = async (req, res) => {
   try {
-    //   "pet_id": "3",
-    // "pet_id_liked": "4"
-    const { pet_id, pet_id_liked } = req.query;
+    const { id_pet, id_pet_liked } = req.query;
     const resultmacthes = await Match.findOne({
-      where: { pet_id, pet_id_liked }
+      where: { id_pet, id_pet_liked }
     });
     if (resultmacthes) {
       const pet = await Pet.findOne({
-            where: { id: resultMatch.pet_id },
-            attributes: ["id", "name", "gender", "about", "photo"],
+            where: { id: resultMatch.id_pet },
+            attributes: ["id", "name", "gender","photo","about"],
              include: [
           { model: Spesies, attributes: ["id", "name"] },
-          { model: Age, attributes: ["name"] },
-          { model: User, attributes: ["id", "breeder", "address", "phone"] }
+          { model: Age, attributes: ["id","name"] },
+          { model: User, attributes: ["id", "breeder","phone","address" ] }
         ]
       });
       const pet_liked = await Pet.findOne({
-        where: { id: resultMatch.pet_id_liked },
+        where: { id: resultMatch.id_pet_liked },
         attributes: ["id", "name", "gender", "aboutpet", "photo"],
         include: [
           { model: Spesies, attributes: ["id", "name"] },
-          { model: Age, attributes: ["name"] },
-          { model: User, attributes: ["id", "breeder", "address", "phone"] }
+          { model: Age, attributes: ["id","name"] },
+          { model: User, attributes: ["id", "breeder","phone","address", ] }
         ]
       });
       res.status(200).send({
