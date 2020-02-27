@@ -1,12 +1,12 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('matches', {
+    return queryInterface.createTable("matches", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER, 
+        type: Sequelize.INTEGER
       },
       id_pet: {
         type: Sequelize.INTEGER,
@@ -19,7 +19,14 @@ module.exports = {
         onDelete: "cascade"
       },
       id_pet_liked: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "pets",
+          key: "id"
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade"
       },
       status: {
         type: Sequelize.BOOLEAN
