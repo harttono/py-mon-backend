@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const pet = sequelize.define('pet', {
     name: DataTypes.STRING,
-    gender: DataTypes.ENUM,
+    gender: DataTypes.STRING,
     id_species: DataTypes.INTEGER,
     id_age: DataTypes.INTEGER,
     id_user: DataTypes.INTEGER,

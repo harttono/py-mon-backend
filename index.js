@@ -1,6 +1,8 @@
 const express             = require("express");
 const bodyparser          = require("body-parser");
                             require("express-group-routes");
+
+
 const { authenticated }   = require("./middleware");
 const logginController    = require("./controllers/login");
 const registerController  = require("./controllers/registration");
@@ -11,8 +13,9 @@ const userController      = require('./controllers/user')
 const paymentController   = require("./controllers/payment")
 const matchController     = require("./controllers/match")
 const app = express();
-// const port = Procces.env.PORT||4003;
-app.set("port",4030);
+// const port = procces.env.PORT || 4001;
+const port = 4030;
+
 app.use(bodyparser.json());
 app.group("/api/v1", router => {
   router.post("/register", registerController.register);
@@ -31,7 +34,7 @@ app.group("/api/v1", router => {
 
   // detail pet router
   router.get("/pet/:id", authenticated,detailController.getDetail);
-``
+
   // // user router
   router.get("/user/:id", authenticated,userController.showUser);
   router.put("/user/:id", authenticated,userController.updateUser);
@@ -47,8 +50,9 @@ app.group("/api/v1", router => {
   router.get("/match", authenticated,matchController.matching);
 });
 
+app.get("/",(req,res)=>{
+  res.send("hello,tehh");
+})
 
 
-app.listen(app.get("port"), () => {
-  console.log("port is running"+"  "+ app.get("port"));
-});
+app.listen(port);

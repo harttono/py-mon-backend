@@ -1,11 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const payment = sequelize.define('payment', {
-    no_rek: DataTypes.INTEGER,
-    proof_of_transfer: DataTypes.STRING,
-    id_user: DataTypes.INTEGER,
-    status: DataTypes.ENUM,
-  }, {});
+  const payment = sequelize.define(
+    "payment",
+    {
+      no_rek: DataTypes.INTEGER,
+      proof_of_transfer: DataTypes.STRING,
+      id_user: DataTypes.INTEGER,
+      status: DataTypes.STRING
+    },
+    {}
+  );
   payment.associate = function(models) {
     payment.belongsTo(models.user,{
       foreignKey: "id_user"
