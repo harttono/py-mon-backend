@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING
   }, {});
   user.associate = function(models) {
+ 
   };
   return user;
 };

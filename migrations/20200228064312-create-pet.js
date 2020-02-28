@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       gender: {
-        type: Sequelize.ENUM(['Female', 'Male'])
+        type: Sequelize.ENUM(["Male", "Female"])
       },
       id_species: {
         type: Sequelize.INTEGER,
@@ -24,9 +24,15 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade"
       },
-      age: {
-        type: Sequelize.ENUM(["Child","Teenager","Adult"]),
+      id_age: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "ages",
+          key: "id"
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade"
       },
       id_user: {
         type: Sequelize.INTEGER,

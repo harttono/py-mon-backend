@@ -23,13 +23,13 @@ app.group("/api/v1", router => {
   router.get("/species", speciesController.getAll);
 
 
-  // //pet router
+  //pet router
   router.post("/pet", authenticated,petController.Insert);
   router.get("/pet", authenticated,petController.getAllPet);
   router.put("/pet/:id", authenticated,petController.updating);
   router.delete("/pet/:id", authenticated,petController.deleting);
 
-  // // detail pet router
+  // detail pet router
   router.get("/pet/:id", authenticated,detailController.getDetail);
 ``
   // // user router
@@ -42,9 +42,9 @@ app.group("/api/v1", router => {
 
   // match router
   router.get("/match", authenticated,matchController.checkmatch);
-  // // router.post("/match", authenticated,matchController.checkmatch);
-  // // router.patch("/match/:id", authenticated, MatchController.UpMat);
-  // // router.get("/match", authenticated, MatchController.TrueMat);
+  router.post("/match", authenticated,matchController.InsertMatch);
+  router.patch("/match/:id", authenticated,matchController.updateMatch);
+  router.get("/match", authenticated,matchController.matching);
 });
 
 

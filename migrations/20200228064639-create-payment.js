@@ -11,7 +11,7 @@ module.exports = {
       no_rek: {
         type: Sequelize.INTEGER
       },
-      proof_of_payment: {
+      proof_of_transfer: {
         type: Sequelize.STRING
       },
       id_user: {

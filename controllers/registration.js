@@ -22,8 +22,8 @@ exports.register = (req, res) => {
           const petData = {
             name: body.pet.name,
             gender: body.pet.gender,
-            id_species: body.pet.spesies.id,
-            age: body.pet.age.id,
+            id_species: body.pet.species.id,
+            id_age: body.pet.age.id,
             id_user: user.id
           };
           Pet.create(petData).then(pet =>{

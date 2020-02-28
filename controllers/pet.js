@@ -1,7 +1,8 @@
-const Model = require("../models");
-const Pet = Model.pet;
-const User = Model.user;
-const Species = Model.species;
+const Model     = require("../models");
+const Pet       = Model.pet;
+const User      = Model.user;
+const Species   = Model.species;
+const Age       = Model.age;    
 
 
 // insert data pet 
@@ -10,8 +11,8 @@ exports.Insert = (req, res) => {
    const dataPet = {
      name: Body.name,
      gender: Body.gender,
-     id_species:Body.species.id,
-     age:Body.age.id,
+     id_species:Body.spesies.id,
+     id_age:Body.age.id,
      id_user:Body.user.id,
      about: Body.about,
      photo: Body.photo
@@ -20,12 +21,13 @@ exports.Insert = (req, res) => {
   Pet.create(dataPet).then(resPet => {
     User.findOne({ where: { id: Body.user.id } }).then(user => {
       Species.findOne({ where: { id: Body.species.id } }).then(species => {
+        Age.findOne({ where: { id: Body.age.id } }).then(age => {
           const resData = {
             id: resPet.id,
             name: resPet.name,
             gender: resPet.gender,
             species,
-            age:resPet.age.id,
+            age,
             user,
             photo: resPet.photo,
             about: resPet.about
@@ -34,7 +36,8 @@ exports.Insert = (req, res) => {
             message: "Data has been successfully",
             resData
           }); 
-      });
+        });
+      })
     });
   });
 };

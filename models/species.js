@@ -4,7 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   }, {});
   species.associate = function(models) {
-    // associations can be defined here
+    // species.hasOne(models.pet, {
+    //   foreignKey: "id_species",
+    //   as: "id_species"
+    // });
   };
   return species;
 };
