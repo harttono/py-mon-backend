@@ -8,11 +8,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      no_rek: {
-        type: Sequelize.INTEGER
+      id_ticket: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "tickets",
+          key: "id"
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade"
       },
-      proof_of_transfer: {
-        type: Sequelize.STRING
+      id_train: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "trains",
+          key: "id"
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade"
       },
       id_user: {
         type: Sequelize.INTEGER,
@@ -24,8 +38,17 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade"
       },
+      qty: {
+        type: Sequelize.INTEGER
+      },
+      total_price: {
+        type: Sequelize.INTEGER
+      },
       status: {
-        type: Sequelize.ENUM(["Free","Premium"])
+        type: Sequelize.STRING
+      },
+      attachment: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

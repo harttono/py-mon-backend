@@ -8,7 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      breeder: {
+      name: {
+        type: Sequelize.STRING
+      },
+      username: {
         type: Sequelize.STRING
       },
       email: {
@@ -17,11 +20,20 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      gender: {
+        type: Sequelize.STRING
+      },
       phone: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       address: {
         type: Sequelize.STRING
+      },
+      role: {
+        type: Sequelize.STRING
+      },
+      admin: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

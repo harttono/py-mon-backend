@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("pets", {
+    return queryInterface.createTable('tickets', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,44 +11,36 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      gender: {
-        type: Sequelize.ENUM(["Male", "Female"])
-      },
-      id_species: {
+      type_train: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "species",
+          model: "trains",
           key: "id"
         },
         onUpdate: "cascade",
         onDelete: "cascade"
       },
-      id_age: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "ages",
-          key: "id"
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade"
-      },
-      id_user: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "users",
-          key: "id"
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade"
-      },
-      photo: {
+      start_date: {
         type: Sequelize.STRING
       },
-      about: {
+      start_station: {
         type: Sequelize.STRING
+      },
+      start_time: {
+        type: Sequelize.STRING
+      },
+      destination: {
+        type: Sequelize.STRING
+      },
+      arrival_time: {
+        type: Sequelize.STRING
+      },
+      price: {
+        type: Sequelize.INTEGER
+      },
+      qty: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -61,6 +53,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('pets');
+    return queryInterface.dropTable('tickets');
   }
 };
