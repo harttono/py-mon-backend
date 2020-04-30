@@ -2,16 +2,13 @@ const express             = require("express");
 const bodyparser          = require("body-parser");
                             require("express-group-routes");
 const cors = require("cors");
-// const user = require("./controllers/user");
 const { authenticated }      = require("./middleware");
 const logginController       = require("./controllers/login");
 const registerController     = require("./controllers/registration");
 
-const getTypeTrainCTRL       = require("./controllers/typeTrain");
-const ticketCTRL             = require('./controllers/ticket')
-// const detailController    = require('./controllers/detailPet')
-// const userController      = require('./controllers/user')
-const paymentCTRL            = require("./controllers/payment")
+const trainController        = require("./controllers/typeTrain");
+const ticketController       = require('./controllers/ticket')
+const orderController        = require('./controllers/order')
 const app = express();
 // const port = procces.env.PORT || 5000;
 const port = 4000;
@@ -25,22 +22,24 @@ app.use(function(req,res,next){
   next();
 })
 app.group("/api/v1", router => {
-// USER ROUTER
-router.post("/register",registerController.register);
-router.post("/login", logginController.login);
-router.get("/checklogin", authenticated,logginController.checkLogin);
-// TICKET ROUTER
-// router.post("/addticket",ticketCTRL.InsertNewTicket);
+// user endpoint
+  router.post("/register",registerController.register);
+  router.post("/login", logginController.login);
+  router.get("/checklogin", authenticated,logginController.checkLogin);
+// ticket endpoint
+  router.post("/addticket",ticketController.InsertNewTicket);
+  router.get("/tickets",ticketController.getTicketsStartTime);
 // router.get("/allticket", ticketCTRL.showAllData);
-// router.get("/tickets",ticketCTRL.getTicketsStartTime);
 // router.get("/tickets/:id",ticketCTRL.getById);
-// TYPE TRAIN ROUTER
-// router.get("/gettypetrain", getTypeTrainCTRL.getTypeTrain);
+// train endpint
+  router.get("/gettypetrain",trainController.getTypeTrain);
 // router.get("/my_tickets",authenticated,ticketCTRL.getMyTicket);
 
-// ORDER ROUTER BY ADMIN
-// router.get("/orders",paymentCTRL.allOrder);
-// router.patch("/order/:id", authenticated, paymentCTRL.update);
+// order endpoint
+router.post("/order",authenticated,orderController.orderTicket);// order ticket By User
+router.get("/orders",authenticated,orderController.getTicketUser);// show data order User
+router.get("/orderAdmin",authenticated,orderController.getAllDataOrder);// show data order User
+router.patch("/order/:id", authenticated,orderController.updateOrderStatus);// update data order by admin
 // router.delete("/orders/:id",authenticated,paymentCTRL.delete);
 // router.post("/order",authenticated,paymentCTRL.order);
 // ORDER ROUTER BY USER

@@ -5,7 +5,7 @@ const User = Model.user;
 exports.login = (req, res) => {
     const { username, password } = req.body;
     console.log(username,password);
-  User.findOne({ where: {username:username}}).then(user =>{
+    User.findOne({ where: {username:username}}).then(user =>{
     if (user){
         bcrypt.compare(password,user.password,function(err,Resbcrypt){
          if (Resbcrypt){

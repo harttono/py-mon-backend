@@ -1,7 +1,7 @@
 const Model             = require("../models");
 const Ticket            = Model.ticket;
 const TypeOfTrain       = Model.train;
-const { Op } = require("sequelize");
+const { Op }            = require("sequelize");
 // insert new ticket 
 exports.InsertNewTicket = (req, res) => {
    const Body  = req.body;
@@ -38,13 +38,13 @@ exports.InsertNewTicket = (req, res) => {
     });
 };
 
-// get ticket today
+// get ticket today & finding a ticket
 exports.getTicketsStartTime = (req, res) => {
   const startTime = req.query.start_time;
   const dateTimeGte = req.query.date_time_gte;
   const dateTimeLte = req.query.date_time_lte;
   const startStation = req.query.start_station;
-  const destinationStation = req.query.destination_station;
+  const destination = req.query.destination;
   if (startTime) {
     Ticket.findAll({
       attributes: [
@@ -60,12 +60,11 @@ exports.getTicketsStartTime = (req, res) => {
       ],
       include: [
         {
-          model: TypeTrain,
-          attributes: ["id", "name"],
-          as: "typeTrain"
+          model: TypeOfTrain,
+          attributes: ["id", "name"]
         }
       ],
-      where: { dateStart: req.query.start_time }
+      where: {start_date: req.query.start_time }
     }).then(data => {
       res.send(data);
     });
@@ -89,13 +88,13 @@ exports.getTicketsStartTime = (req, res) => {
           attributes: ["id", "name"],
         }
       ],
-      where: {
+      where:{
         [Op.and]: [
           { start_date: { [Op.gte]: dateTimeGte } },
           { start_date: { [Op.lte]: dateTimeLte } }
         ],
-        start_station: { [Op.like]: `%${startStation}%` },
-        destination: { [Op.like]: `%${destinationStation}%` }
+        start_station: {[Op.like]:`%${startStation}%`},
+        destination: {[Op.like]:`%${destination}%`}
       }
     }).then(data => {
       res.send(data);

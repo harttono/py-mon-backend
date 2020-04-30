@@ -18,16 +18,6 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade"
       },
-      id_train: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "trains",
-          key: "id"
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade"
-      },
       id_user: {
         type: Sequelize.INTEGER,
         allowNull: false,
