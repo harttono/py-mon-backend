@@ -1,7 +1,6 @@
 {
   "name": "apibackend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "bcrypt": "^4.0.0",
@@ -23,5 +22,14 @@
     "start": "nodemon index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harttonz/landtick-Backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Harttonz/landtick-Backend/issues"
+  },
+  "homepage": "https://github.com/Harttonz/landtick-Backend#readme",
+  "description": ""
 }
