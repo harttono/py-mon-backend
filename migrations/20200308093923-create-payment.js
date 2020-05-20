@@ -1,32 +1,22 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("pets", {
+    return queryInterface.createTable("payments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      gender: {
-        type: Sequelize.ENUM(['Female', 'Male'])
-      },
-      id_species: {
+      id_ticket: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "species",
+          model: "tickets",
           key: "id"
         },
         onUpdate: "cascade",
         onDelete: "cascade"
-      },
-      age: {
-        type: Sequelize.ENUM(['Child','Teenager','Adult']),
-        allowNull: false,
       },
       id_user: {
         type: Sequelize.INTEGER,
@@ -38,10 +28,16 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade"
       },
-      photo: {
+      qty: {
+        type: Sequelize.INTEGER
+      },
+      total_price: {
+        type: Sequelize.INTEGER
+      },
+      status: {
         type: Sequelize.STRING
       },
-      about: {
+      attachment: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -55,6 +51,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('pets');
+    return queryInterface.dropTable('payments');
   }
 };
