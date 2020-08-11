@@ -9,19 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     attachment: DataTypes.STRING
   }, {});
   payment.associate = function(models) {
-<<<<<<< HEAD
-    payment.hasMany(models.user, {
+  payment.belongsTo(models.user,{
       foreignKey: "id_user",
       as: "user"
     });
-=======
-     payment.belongsTo(models.ticket, {
-       foreignKey: "id_ticket"
-     });
-    payment.belongsTo(models.user, {
-       foreignKey: "id_user"
-     });
->>>>>>> backup
   };
   return payment;
 };

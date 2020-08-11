@@ -21,14 +21,12 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade"
       },
-<<<<<<< HEAD:migrations/20200223165508-create-pet.js
       age: {
         type: Sequelize.ENUM(['Child','Teenager','Adult']),
-        allowNull: false,
-=======
+        allowNull: false
+      },
       start_date: {
         type: Sequelize.STRING
->>>>>>> backup:migrations/20200308093528-create-ticket.js
       },
       start_station: {
         type: Sequelize.STRING
@@ -55,7 +53,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
