@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const ticket = sequelize.define('ticket', {
     name: DataTypes.STRING,
     type_train: DataTypes.INTEGER,
+    age: DataTypes.STRING,
     start_date: DataTypes.STRING,
     start_station: DataTypes.STRING,
     start_time: DataTypes.STRING,
@@ -11,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     qty: DataTypes.INTEGER
   }, {});
-  ticket.associate = function(models) {
-    ticket.belongsTo(models.train, {
+  ticket.associate = function(models){
+    ticket.belongsTo(models.train,{
        foreignKey: "type_train"
-     });
+     }); 
   };
   return ticket;
 };

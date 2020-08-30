@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const payment = sequelize.define('payment', {
+  const order = sequelize.define('order',{
     id_ticket: DataTypes.INTEGER,
     id_user: DataTypes.INTEGER,
     qty: DataTypes.INTEGER,
@@ -8,11 +8,13 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     attachment: DataTypes.STRING
   }, {});
-  payment.associate = function(models) {
-  payment.belongsTo(models.user,{
-      foreignKey: "id_user",
-      as: "user"
+  order.associate = function(models){
+    order.belongsTo(models.ticket,{
+      foreignKey: "id_ticket"
+    });
+    order.belongsTo(models.user,{
+      foreignKey: "id_user"
     });
   };
-  return payment;
+  return order;
 };

@@ -33,7 +33,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       admin: {
+
         type: Sequelize.BOOLEAN
+      },
+      picture:{
+       type:Sequelize.STRING 
       },
       createdAt: {
         allowNull: false,

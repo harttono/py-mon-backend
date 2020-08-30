@@ -11,10 +11,10 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      type_train: {
+      type_train:{
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
+        references:{
           model: "trains",
           key: "id"
         },
@@ -22,7 +22,7 @@ module.exports = {
         onDelete: "cascade"
       },
       age: {
-        type: Sequelize.ENUM(['Child','Teenager','Adult']),
+        type: Sequelize.STRING,
         allowNull: false
       },
       start_date: {

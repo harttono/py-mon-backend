@@ -9,10 +9,13 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING,
     address: DataTypes.STRING,
     role: DataTypes.STRING,
-    admin: DataTypes.BOOLEAN
+    admin: DataTypes.BOOLEAN,
+    picture:DataTypes.STRING
   },{});
   user.associate = function(models) {
-    // associations can be defined here
+    user.hasMany(models.order, {
+      foreignKey: 'id_user',
+    })
   };
   return user;
 };
