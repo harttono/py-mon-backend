@@ -11,7 +11,7 @@ const multer                 = require('multer');
 const path                   = require('path');
 const {isAuth}               = require('./utils/auth');
 const app                    = express();
-const PORT                   = 4000;
+const PORT                   = process.env.PORT || 4000;
 app.use(bodyparser.json());
 app.use(cors());
 app.use(bodyparser.urlencoded({extended: true}))
@@ -73,4 +73,4 @@ app.group("/api/v1", router => {
   router.delete('/order/:id',isAuth,orderRouter.delete);
   router.patch('/order/:id',isAuth,orderRouter.updateOrder);
 });
-app.listen(process.env.PORT || PORT);
+app.listen(PORT);

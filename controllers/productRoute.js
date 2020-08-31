@@ -63,7 +63,7 @@ exports.showProduct = async(req, res) => {
   else if(date_gte && date_lte){
         Ticket.findAll({
           order:[['start_date','ASC']],
-          attributes:["id","name","start_date","start_station","start_time","destination","arrival_time","price","qty"],
+          attributes:["id","name","start_date","age","start_station","start_time","destination","arrival_time","price","qty"],
           include: [{model: TypeOfTrain,attributes: ["id", "name"]}],
           where:{
               [Op.and]:[
@@ -79,8 +79,7 @@ exports.showProduct = async(req, res) => {
       } 
     else{
         res.status(400).send({
-          error:'not found data',
-          message:"use these params[proxy]/product?start_time=2020-03-03 OR [proxy]/product?date_gte=2020-03-01&date_lte=2020-03-02&start_station=city&destination=city"
+          message:"use these params[proxy]/products?start_date=2020-03-03 OR [proxy]/product?date_gte=2020-03-01&date_lte=2020-03-02&start_station=city&destination=city"
       });
    }           
 };

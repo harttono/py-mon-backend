@@ -20,6 +20,9 @@
   "scripts": {
     "start": "nodemon index.js"
   },
+  "engines" : { 
+    "node" : ">=8.6" 
+  },
   "author": "",
   "license": "ISC",
   "repository": {

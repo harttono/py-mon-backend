@@ -120,7 +120,7 @@ const {status} = req.query;
                 include:[
                   {
                   model:Ticket,
-                  attributes:['id','name','start_date','start_station','start_time','destination','arrival_time','price','qty'],
+                  attributes:['id','name','start_date','age','start_station','start_time','destination','arrival_time','price','qty'],
                       include:[{model:Type,attributes:['id','name']}]
                   },
                   {
@@ -148,7 +148,7 @@ const {status} = req.query;
               include:[
                 {
                   model:Ticket,
-                  attributes:["id","name","start_date","start_station","start_time","destination","arrival_time","price","qty"],
+                  attributes:["id","name","start_date","age","start_station","start_time","destination","arrival_time","price","qty"],
                     include:[
                       {
                         model:Type,
