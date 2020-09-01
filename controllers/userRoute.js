@@ -1,23 +1,28 @@
 const express = require("express");
+const bcrypt  = require("bcrypt");
 const Model = require('../models');
 const User = Model.user;
 const util = require('../utils/auth');
 
 // login user and admin 
 exports.login = async (req,res) =>{
-    const {username,password} = req.body;
-    const signinUser = await User.findOne({where:{username:username,password:password}});
+    const {email,password} = req.body;
+    const signinUser = await User.findOne({where:{email:email}});
     if(signinUser){
-        res.send({
-            id:signinUser.id,
-            name:signinUser.name,
-            phone:signinUser.phone,
-            username:signinUser.username,
-            email:signinUser.email,
-            isAdmin:signinUser.admin,
-            picture:signinUser.picture,
-            token:util.getToken(signinUser)
-        })
+        if(bcrypt.compareSync(password,signinUser.password)){
+            res.send({
+                id:signinUser.id,
+                name:signinUser.name,
+                phone:signinUser.phone,
+                username:signinUser.username,
+                email:signinUser.email,
+                isAdmin:signinUser.admin,
+                picture:signinUser.picture,
+                token:util.getToken(signinUser)
+            })
+        }else{
+            return res.status(401).send({message:'Invalid Password'})
+        }    
     }else{
         return res.status(401).send({message:'Invalid Username or Password'})
     }
@@ -25,31 +30,47 @@ exports.login = async (req,res) =>{
 
 // register new user
 exports.register = async (req,res) =>{
-    const {name,username,email,password,gender,phone,address} = req.body;
-    const user= {
-        name:name,
-        username:username,
-        email:email,
-        password:password,
-        gender:gender,
-        phone:phone,
-        address:address,
-        role:"User",
-        admin:0,
-        picture:'http://localhost:4000/profile/account.png'
-    };
-    const newUser = await User.create(user);
-    if(newUser){
-        res.send({
-            id:newUser.id,
-            name:newUser.name,
-            email:newUser.email,
-            isAdmin:newUser.admin,
-            token:util.getToken(newUser)
+    try{
+        const {name,username,email,password,gender,phone,address} = req.body;
+        const userData = {
+            name:name,
+            username:username,
+            email:email,
+            password:password,
+            gender:gender,
+            phone:phone,
+            address:address,
+            role:"User",
+            admin:0,
+            picture:'http://localhost:4000/profile/account.png'
+        };
+        const user = await User.findOne({
+            where:{
+                email:email
+            }
         })
-    }else{
-        return res.status(401).send({message:'invalid user data'})
-    }
+        if (!user){
+            bcrypt.hash(req.body.password,10,async (err,hash) =>{
+                userData.password = hash;
+                const newUser = await User.create(userData);
+                if(newUser){
+                    res.send({
+                        id:newUser.id,
+                        name:newUser.name,
+                        email:newUser.email,
+                        isAdmin:newUser.admin,
+                        token:util.getToken(newUser)
+                    })
+                }else{
+                    return res.status(401).send({message:'invalid user data'})
+                }
+            })  
+        }else{
+            res.status(401).send({message:'user already axists'})
+        }   
+    }catch(err){
+        res.send({message:`error ${err}`})
+    }        
 }
 
 // create new admin as default
